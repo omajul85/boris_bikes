@@ -1,10 +1,10 @@
 require 'Bike'
 
 describe Bike do 
-  it { is_expected.to respond_to(:working?) }
+  it { is_expected.to respond_to(:broken?) }
 
-  it 'responds to working?' do
-    expect(subject).to be_working
+  it "reports a broken bike" do
+    expect(subject.report_broken).to be true
   end
 
 end

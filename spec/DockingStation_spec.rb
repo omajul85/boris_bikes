@@ -23,7 +23,7 @@ describe DockingStation do
   end
 
   context "Mixing docking and releasing actions" do
-    it "docking and releasing a bike" do
+    it "docks and releases a bike" do
       bike = Bike.new
       subject.dock(bike)
       expect(subject.release_bike).to eq(bike)
