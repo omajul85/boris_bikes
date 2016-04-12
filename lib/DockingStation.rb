@@ -3,7 +3,7 @@ require_relative './Bike'
 
 class DockingStation
 
-DEFAULT_CAPACITY = 20
+  DEFAULT_CAPACITY = 20
 
   attr_reader :bikes
 
@@ -19,11 +19,6 @@ DEFAULT_CAPACITY = 20
   def dock(bike)
     raise "Station full" if full?
     @bikes << bike
-    @bikes.last
-  end
-
-  def has_bike?
-    true
   end
 
   private
