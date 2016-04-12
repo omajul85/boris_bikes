@@ -7,20 +7,26 @@ describe DockingStation do
   it "responds to dock with 1 argument" do
       expect(subject).to respond_to(:dock).with(1).argument 
   end
-  
-  it "returns a bike when calling dock" do
-      bike = Bike.new
-      expect(subject.dock(bike)).to eq(bike) 
+
+  context '#dock' do
+    it "returns a bike when calling dock" do
+        bike = Bike.new
+        expect(subject.dock(bike)).to eq(bike) 
+    end
   end
 
   it { is_expected.to have_bike } #.has_bike?
 
-  it "raises an exception if there's no bike" do
-    expect { subject.release_bike }.to raise_error "No bike"
+  context "#release_bike" do
+    it "raises an exception if there's no bike" do
+      expect { subject.release_bike }.to raise_error "No bike"
+    end
   end
   
   it 'raises an error when full' do
-    subject.dock(Bike.new)
+    DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
     expect { subject.dock Bike.new }.to raise_error 'Station full'
   end
+
+  it { is_expected.to have_attributes(:bikes => [] ) }
 end
