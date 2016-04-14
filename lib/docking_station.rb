@@ -3,7 +3,6 @@ require_relative './van'
 require_relative './garage'
 
 class DockingStation
-
 	DEFAULT_CAPACITY = 20
 
 	attr_reader :bikes, :capacity
@@ -25,10 +24,10 @@ class DockingStation
 		@bikes.last
 	end
 	
-	def select_broken_bikes
-		broken_bikes = @bikes.select{ |b| b.broken? }
-		@bikes.reject!{ |b| b.broken? }
-		broken_bikes
+	def select_broken_bike
+		broken_bike = @bikes.detect(&:broken?)
+		@bikes.delete(broken_bike)
+		broken_bike
 	end
 	
 	private
@@ -42,4 +41,13 @@ class DockingStation
 		end
 end
 
-
+b1 = Bike.new
+b2 = Bike.new                                                                                                              
+b3 = Bike.new
+b1.report_broken
+b2.report_broken
+ds = DockingStation.new
+ds.dock b1
+ds.dock b2
+ds.dock b3
+ds.select_broken_bike

@@ -1,5 +1,7 @@
 class Van
   
+  DEFAULT_CAPACITY = 2
+  
   attr_reader :broken_bikes
   
   def collect_broken_bikes(station)

@@ -5,6 +5,7 @@ describe DockingStation do
 	let(:bike) { double(:bike) }
 	let(:broken_bike) { double(:broken_bike, report_broken: true, broken?: true) }
 	let(:broken_bike2) { double(:broken_bike2, report_broken: true, broken?: true) }
+	let(:broken_bike3) { double(:broken_bike3, report_broken: true, broken?: true) }
 
 	subject(:ds) {DockingStation.new}
 
@@ -63,11 +64,11 @@ describe DockingStation do
 
 	end
 	
-	context "#select_broken_bikes" do
-		it "selects ALL broken bikes" do
-			ds.dock(broken_bike)
-			ds.dock(broken_bike2)
-			expect(ds.select_broken_bikes).to eq [broken_bike, broken_bike2]
-		end
+	it "selects a broken bike" do
+		allow(broken_bike).to receive(:broken?).and_return(true)
+		allow(broken_bike2).to receive(:broken?).and_return(true)
+		ds.dock(broken_bike)
+		ds.dock(broken_bike2)
+		expect(ds.select_broken_bike).to eq broken_bike
 	end
 end
