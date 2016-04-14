@@ -31,7 +31,6 @@ class DockingStation
 		broken_bikes
 	end
 	
-	
 	private
 	
 		def full?

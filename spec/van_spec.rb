@@ -1,4 +1,5 @@
 require 'van'
+
 describe Van do
   let(:broken_bike) { double(:broken_bike, report_broken: true, broken?: true) }
 	let(:broken_bike2) { double(:broken_bike2, report_broken: true, broken?: true) }
