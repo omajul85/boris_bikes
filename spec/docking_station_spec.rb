@@ -64,11 +64,13 @@ describe DockingStation do
 
 	end
 	
-	it "selects a broken bike" do
+	it "select a defined number of broken bikes" do
 		allow(broken_bike).to receive(:broken?).and_return(true)
 		allow(broken_bike2).to receive(:broken?).and_return(true)
+		allow(broken_bike3).to receive(:broken?).and_return(true)
 		ds.dock(broken_bike)
 		ds.dock(broken_bike2)
-		expect(ds.select_broken_bike).to eq broken_bike
+		ds.dock(broken_bike3)
+		expect(ds.select_broken_bikes(2)).to eq [broken_bike, broken_bike2]
 	end
 end

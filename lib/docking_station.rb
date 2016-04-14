@@ -24,10 +24,13 @@ class DockingStation
 		@bikes.last
 	end
 	
-	def select_broken_bike
-		broken_bike = @bikes.detect(&:broken?)
-		@bikes.delete(broken_bike)
-		broken_bike
+	def select_broken_bikes(quantity)
+		broken_bikes = []
+		@bikes.each do |bike|
+			broken_bikes << bike if bike.broken? and broken_bikes.count < quantity
+		end
+		@bikes -= broken_bikes
+		broken_bikes
 	end
 	
 	private
@@ -41,13 +44,13 @@ class DockingStation
 		end
 end
 
-b1 = Bike.new
-b2 = Bike.new                                                                                                              
-b3 = Bike.new
-b1.report_broken
-b2.report_broken
-ds = DockingStation.new
-ds.dock b1
-ds.dock b2
-ds.dock b3
-ds.select_broken_bike
+# b1 = Bike.new
+# b2 = Bike.new                                                                                                              
+# b3 = Bike.new
+# b1.report_broken
+# b2.report_broken
+# ds = DockingStation.new
+# ds.dock b1
+# ds.dock b2
+# ds.dock b3
+# ds.select_broken_bikes
