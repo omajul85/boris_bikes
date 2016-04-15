@@ -13,8 +13,7 @@ ds.dock b2
 ds.dock b3
 
 v.collect_broken_bikes_from_station ds
-v.bikes
 v.send_broken_bikes_to_garage g
-v.bikes
 v.collect_working_bikes_from_garage g
+ds.receive_bikes_from_van v
 

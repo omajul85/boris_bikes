@@ -33,6 +33,11 @@ class DockingStation
 		broken_bikes
 	end
 	
+	def receive_bikes_from_van(van)
+		dock(van.bikes.shift) while not full?
+		@bikes.compact!
+	end
+
 	private
 	
 		def full?

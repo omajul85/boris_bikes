@@ -3,6 +3,8 @@ require 'docking_station'
 describe DockingStation do 
 
 	let(:bike) { double(:bike) }
+	let(:bike2) { double(:bike) }
+	let(:van) { double(:van, :bikes => [bike, bike2]) }
 	let(:broken_bike) { double(:broken_bike, report_broken: true, broken?: true) }
 	let(:broken_bike2) { double(:broken_bike2, report_broken: true, broken?: true) }
 	let(:broken_bike3) { double(:broken_bike3, report_broken: true, broken?: true) }
@@ -72,5 +74,10 @@ describe DockingStation do
 		ds.dock(broken_bike2)
 		ds.dock(broken_bike3)
 		expect(ds.select_broken_bikes(2)).to eq [broken_bike, broken_bike2]
+	end
+	
+	it "receives working bikes from van" do
+		allow(van).to receive(:bikes).and_return [bike, bike2]
+		expect(subject.receive_bikes_from_van(van)).to eq [bike, bike2]
 	end
 end
