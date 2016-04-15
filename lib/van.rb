@@ -2,29 +2,30 @@ class Van
   
   DEFAULT_CAPACITY = 2
   
-  attr_reader :broken_bikes, :working_bikes
+  attr_reader :bikes
   
   def initialize(capacity = DEFAULT_CAPACITY)
-    @broken_bikes = []
-    @working_bikes = []
+    @bikes = []
     @capacity = capacity
   end
   
   def collect_broken_bikes_from_station(station)
-    @broken_bikes = station.select_broken_bikes(@capacity)
-    @capacity -= @broken_bikes.count
-    @broken_bikes
+    @bikes = station.select_broken_bikes(remaining_capacity)
   end
   
   def send_broken_bikes_to_garage(garage)
-    garage.receive_bikes_from_van(@broken_bikes)
-    @broken_bikes = []
+    garage.receive_bikes_from_van(self)
+    @bikes = []
     garage.bikes
   end
   
   def collect_working_bikes_from_garage(garage)
-    @working_bikes = garage.deliver_bikes_to_van(@capacity)
-    @capacity -= @working_bikes.count
+    @bikes = garage.deliver_working_bikes(remaining_capacity)
   end
   
+  private
+  
+    def remaining_capacity
+      @capacity - @bikes.count
+    end
 end

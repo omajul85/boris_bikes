@@ -1,0 +1,20 @@
+ds = DockingStation.new
+v = Van.new
+g = Garage.new
+
+b1 = Bike.new
+b2 = Bike.new                                                                                                              
+b3 = Bike.new
+b1.report_broken
+b2.report_broken
+
+ds.dock b1
+ds.dock b2
+ds.dock b3
+
+v.collect_broken_bikes_from_station ds
+v.bikes
+v.send_broken_bikes_to_garage g
+v.bikes
+v.collect_working_bikes_from_garage g
+

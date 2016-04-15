@@ -43,14 +43,3 @@ class DockingStation
 			@bikes.empty?
 		end
 end
-
-# b1 = Bike.new
-# b2 = Bike.new                                                                                                              
-# b3 = Bike.new
-# b1.report_broken
-# b2.report_broken
-# ds = DockingStation.new
-# ds.dock b1
-# ds.dock b2
-# ds.dock b3
-# ds.select_broken_bikes

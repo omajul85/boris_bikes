@@ -7,14 +7,22 @@ class Garage
   end
   
   def receive_bikes_from_van(van)
-    @bikes = van.broken_bikes
+    @bikes = van.bikes
+    fix_bikes
   end
   
-  def deliver_bikes_to_van(van)
-    van.collect_working_bikes_from_garage
+  def deliver_working_bikes(quantity)
+    working_bikes = []
+    @bikes.each do |bike|
+			working_bikes << bike if working_bikes.count < quantity
+		end
+		@bikes -= working_bikes
+    working_bikes
   end
   
-  def fix_bikes
-    @bikes.each { |bike| bike.report_working }
-  end
+  private
+  
+    def fix_bikes
+      @bikes.each { |bike| bike.report_working }
+    end
 end
